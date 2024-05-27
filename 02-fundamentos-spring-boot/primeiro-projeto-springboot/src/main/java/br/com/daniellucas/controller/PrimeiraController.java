@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,5 +49,16 @@ public class PrimeiraController {
   @PostMapping("/metodoComHeaders2")
   public String metodoComHeaders2(@RequestHeader Map<String, String> headers) {
     return "metodoComHeaders2 " + headers.entrySet();
+  }
+
+  @GetMapping("/metodoResponseEntity/{id}")
+  public ResponseEntity<Object> metodoResponseEntity(@PathVariable Integer id) {
+    var usario = new Usuario("batata");
+
+    if (id > 5) {
+      return ResponseEntity.status(HttpStatus.OK).body(usario);
+    }
+
+    return ResponseEntity.badRequest().body("Numero menor que 5");
   }
 }
