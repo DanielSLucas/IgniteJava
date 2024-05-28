@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.daniellucas.gestao_vagas.exceptions.ResourceNotFoundException;
 import br.com.daniellucas.gestao_vagas.modules.company.dto.AuthCompanyDTO;
 import br.com.daniellucas.gestao_vagas.modules.company.repositories.CompanyRepository;
-import br.com.daniellucas.providers.JWTProvider;
+import br.com.daniellucas.gestao_vagas.providers.JWTProvider;
 
 @Service
 public class AuthCompanyUseCase {

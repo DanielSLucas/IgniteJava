@@ -1,4 +1,4 @@
-package br.com.daniellucas.providers;
+package br.com.daniellucas.gestao_vagas.providers;
 
 import java.time.Duration;
 import java.time.Instant;
