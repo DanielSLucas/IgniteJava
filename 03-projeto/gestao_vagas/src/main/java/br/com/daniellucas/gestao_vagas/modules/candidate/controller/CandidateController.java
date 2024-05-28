@@ -4,8 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.daniellucas.gestao_vagas.modules.candidate.CandidateEntity;
-import br.com.daniellucas.gestao_vagas.modules.candidate.CandidateRepository;
-import br.com.daniellucas.gestao_vagas.modules.exceptions.CandidateAlredyExistsException;
+import br.com.daniellucas.gestao_vagas.modules.candidate.useCases.CreateCandidateUseCase;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +19,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class CandidateController {
   
   @Autowired
-  private CandidateRepository candidateRepository;
+  CreateCandidateUseCase createCandidateUseCase;
 
   @PostMapping("/")
-  public ResponseEntity<CandidateEntity> create(@Valid @RequestBody CandidateEntity candidateEntity) {  
-    this.candidateRepository
-      .findByUsernameOrEmail(candidateEntity.getUsername(), candidateEntity.getEmail())
-      .ifPresent((user) -> {
-        throw new CandidateAlredyExistsException();
-      });
+  public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {  
+    try {
+      var entity = this.createCandidateUseCase.execute(candidateEntity);
 
-    var entity =this.candidateRepository.save(candidateEntity);
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(entity);
+      return ResponseEntity.status(HttpStatus.CREATED).body(entity);
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
   }
   
 }
