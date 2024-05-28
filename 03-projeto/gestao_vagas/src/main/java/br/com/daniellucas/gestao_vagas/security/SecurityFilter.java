@@ -6,6 +6,7 @@ import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -29,21 +30,25 @@ public class SecurityFilter extends OncePerRequestFilter {
     HttpServletResponse response, 
     FilterChain filterChain
   ) throws ServletException, IOException {
-    SecurityContextHolder.getContext().setAuthentication(null);
+    // SecurityContextHolder.getContext().setAuthentication(null);
     
     String header = request.getHeader(HttpHeaders.AUTHORIZATION);
     
     if (header != null) {
-      var tokenSub = this.jwtProvider.validateToken(header);
+      var token = this.jwtProvider.validateToken(header);
 
-      if(tokenSub.isEmpty()) {
+      if(token == null) {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         return;
       }
 
-      request.setAttribute("sub", tokenSub);
+      request.setAttribute("sub", token.getSubject());
 
-      var auth = new UsernamePasswordAuthenticationToken(tokenSub, null, Collections.emptyList());
+      var roles = token.getClaim("roles").asList(String.class);
+      var grants = roles.stream()
+        .map(role -> new SimpleGrantedAuthority("ROLE_" + role.toUpperCase())).toList();
+
+      var auth = new UsernamePasswordAuthenticationToken(token.getSubject(), null, grants);
 
       SecurityContextHolder.getContext().setAuthentication(auth);
     }

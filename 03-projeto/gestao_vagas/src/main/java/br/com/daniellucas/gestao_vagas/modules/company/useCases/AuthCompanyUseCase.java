@@ -42,7 +42,7 @@ public class AuthCompanyUseCase {
     var token = this.jwtProvider.generateToken(
       company.getId().toString(),
       Instant.now().plus(Duration.ofHours(2)),
-      Arrays.asList("company")
+      Arrays.asList("COMPANY")
     );
 
     return token;

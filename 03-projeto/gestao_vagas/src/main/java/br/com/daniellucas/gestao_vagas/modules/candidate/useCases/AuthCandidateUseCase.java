@@ -47,7 +47,7 @@ public class AuthCandidateUseCase {
     var token = this.jwtProvider.generateToken(
       candidate.getId().toString(),
       expiration,
-      Arrays.asList("company")
+      Arrays.asList("CANDIDATE")
     );
 
     return AuthCandidateResponseDTO.builder()

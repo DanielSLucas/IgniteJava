@@ -14,6 +14,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -26,6 +27,7 @@ public class JobController {
   private CreateJobUseCase createJobUseCase;
 
   @PostMapping("/")
+  @PreAuthorize("hasRole('COMPANY')")
   public ResponseEntity<JobEntity> postMethodName(
     @Valid @RequestBody CreateJobDTO createJobDTO,
     HttpServletRequest request
