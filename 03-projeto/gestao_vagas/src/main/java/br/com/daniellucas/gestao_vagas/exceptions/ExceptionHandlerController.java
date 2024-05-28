@@ -1,4 +1,4 @@
-package br.com.daniellucas.gestao_vagas.modules.exceptions;
+package br.com.daniellucas.gestao_vagas.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

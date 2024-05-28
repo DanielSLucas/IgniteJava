@@ -1,4 +1,4 @@
-package br.com.daniellucas.gestao_vagas.modules.exceptions;
+package br.com.daniellucas.gestao_vagas.exceptions;
 
 public class ResourceAlredyExistsException extends RuntimeException {
   public ResourceAlredyExistsException() {
