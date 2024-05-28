@@ -1,5 +1,9 @@
 package br.com.daniellucas.gestao_vagas.modules.company.useCases;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Arrays;
+
 import javax.naming.AuthenticationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +39,11 @@ public class AuthCompanyUseCase {
       throw new AuthenticationException();
     }
 
-    var token = this.jwtProvider.generateToken(company.getId().toString());
+    var token = this.jwtProvider.generateToken(
+      company.getId().toString(),
+      Instant.now().plus(Duration.ofHours(2)),
+      Arrays.asList("company")
+    );
 
     return token;
   }

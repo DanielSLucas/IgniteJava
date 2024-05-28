@@ -1,7 +1,7 @@
 package br.com.daniellucas.gestao_vagas.providers;
 
-import java.time.Duration;
 import java.time.Instant;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,11 +16,12 @@ public class JWTProvider {
   @Value("${security.token.secret}")
   private String secretKey;
 
-  public String generateToken(String sub) {
+  public String generateToken(String sub, Instant expiresAt, List<String> roles) {
     return JWT.create()
       .withIssuer("javagas")
-      .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
+      .withExpiresAt(expiresAt)
       .withSubject(sub)
+      .withClaim("roles", roles)
       .sign(this.getAlgorithm());
   }
   
