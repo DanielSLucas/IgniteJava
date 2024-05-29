@@ -17,12 +17,19 @@ public class SecurityConfig {
   @Autowired
   private SecurityFilter securityFilter;
 
+  private final String[] SWAGGER_URLS = {
+    "/swagger-ui/**",
+    "/swagger-resources/**",
+    "/v3/api-docs/**"
+  };
+
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
       .csrf(csrf -> csrf.disable())
       .authorizeHttpRequests(auth -> {
         auth
+          .requestMatchers(SWAGGER_URLS).permitAll()
           .requestMatchers("/candidates/").permitAll()
           .requestMatchers("/companies/").permitAll()
           .requestMatchers("/auth/company").permitAll()
