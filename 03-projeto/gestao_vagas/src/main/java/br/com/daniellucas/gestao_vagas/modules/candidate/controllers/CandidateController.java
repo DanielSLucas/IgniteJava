@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -85,6 +86,7 @@ public class CandidateController {
       )
     })
   })
+  @SecurityRequirement(name = "jwt_auth")
   public ResponseEntity<List<JobEntity>> findJobByFilter(@RequestParam String filter) {
     var result = this.listAllJobsByFilterUseCase.execute(filter);
     return ResponseEntity.status(HttpStatus.OK).body(result);
