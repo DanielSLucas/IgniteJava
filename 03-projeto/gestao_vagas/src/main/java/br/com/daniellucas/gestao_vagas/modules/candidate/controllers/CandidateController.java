@@ -8,6 +8,13 @@ import br.com.daniellucas.gestao_vagas.modules.candidate.useCases.CreateCandidat
 import br.com.daniellucas.gestao_vagas.modules.candidate.useCases.ListAllJobsByFilterUseCase;
 import br.com.daniellucas.gestao_vagas.modules.candidate.useCases.ProfileCandidateUseCase;
 import br.com.daniellucas.gestao_vagas.modules.company.entities.JobEntity;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
@@ -66,6 +73,18 @@ public class CandidateController {
   
   @GetMapping("/jobs")
   @PreAuthorize("hasRole('CANDIDATE')")
+  @Tag(name = "Candidato", description = "Informação pertinentes ao candidato")
+  @Operation(
+    summary = "Listagem de vagas disponíveis para o candidato",
+    description = "Esta função é responsável por listar todas as vagas disponíveis, baseada no filtro"
+  )
+  @ApiResponses({
+    @ApiResponse(responseCode = "200", content = {
+      @Content(
+        array = @ArraySchema(schema = @Schema(implementation = JobEntity.class))
+      )
+    })
+  })
   public ResponseEntity<List<JobEntity>> findJobByFilter(@RequestParam String filter) {
     var result = this.listAllJobsByFilterUseCase.execute(filter);
     return ResponseEntity.status(HttpStatus.OK).body(result);
