@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/candidates")
+@Tag(name = "Candidato", description = "Informação pertinentes ao candidato")
 public class CandidateController {
   
   @Autowired
@@ -49,6 +50,22 @@ public class CandidateController {
 
 
   @PostMapping("/")
+  @Operation(
+    summary = "Cadastro de candidato",
+    description = "Esta função é responsável por cadastrar um candidato"
+  )
+  @ApiResponses({
+    @ApiResponse(responseCode = "200", content = {
+      @Content(
+        schema = @Schema(implementation = CandidateEntity.class)
+      )
+    }),
+    @ApiResponse(responseCode = "400", content = {
+      @Content(
+        schema = @Schema(implementation = String.class)
+      )
+    })
+  })
   public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {  
     try {
       var entity = this.createCandidateUseCase.execute(candidateEntity);
@@ -61,7 +78,6 @@ public class CandidateController {
   
   @GetMapping("/me")
   @PreAuthorize("hasRole('CANDIDATE')")
-  @Tag(name = "Candidato", description = "Informação pertinentes ao candidato")
   @Operation(
     summary = "Perfil do candidato",
     description = "Esta função é responsável por buscar as informações do perfil do candidato"
@@ -93,7 +109,6 @@ public class CandidateController {
   
   @GetMapping("/jobs")
   @PreAuthorize("hasRole('CANDIDATE')")
-  @Tag(name = "Candidato", description = "Informação pertinentes ao candidato")
   @Operation(
     summary = "Listagem de vagas disponíveis para o candidato",
     description = "Esta função é responsável por listar todas as vagas disponíveis, baseada no filtro"
