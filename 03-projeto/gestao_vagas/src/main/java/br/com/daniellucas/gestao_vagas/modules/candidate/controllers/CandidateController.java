@@ -3,8 +3,8 @@ package br.com.daniellucas.gestao_vagas.modules.candidate.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.daniellucas.gestao_vagas.modules.candidate.CandidateEntity;
 import br.com.daniellucas.gestao_vagas.modules.candidate.dto.ProfileCandidateResponseDTO;
+import br.com.daniellucas.gestao_vagas.modules.candidate.entities.CandidateEntity;
 import br.com.daniellucas.gestao_vagas.modules.candidate.useCases.CreateCandidateUseCase;
 import br.com.daniellucas.gestao_vagas.modules.candidate.useCases.ListAllJobsByFilterUseCase;
 import br.com.daniellucas.gestao_vagas.modules.candidate.useCases.ProfileCandidateUseCase;

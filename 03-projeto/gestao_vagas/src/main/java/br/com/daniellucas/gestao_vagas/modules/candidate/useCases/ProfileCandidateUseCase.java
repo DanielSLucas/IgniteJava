@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.daniellucas.gestao_vagas.exceptions.ResourceNotFoundException;
-import br.com.daniellucas.gestao_vagas.modules.candidate.CandidateRepository;
 import br.com.daniellucas.gestao_vagas.modules.candidate.dto.ProfileCandidateResponseDTO;
+import br.com.daniellucas.gestao_vagas.modules.candidate.repositories.CandidateRepository;
 
 @Service
 public class ProfileCandidateUseCase {

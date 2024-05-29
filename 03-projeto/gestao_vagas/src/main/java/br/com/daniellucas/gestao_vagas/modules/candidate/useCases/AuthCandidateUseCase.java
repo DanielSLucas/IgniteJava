@@ -11,9 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.daniellucas.gestao_vagas.exceptions.ResourceNotFoundException;
-import br.com.daniellucas.gestao_vagas.modules.candidate.CandidateRepository;
 import br.com.daniellucas.gestao_vagas.modules.candidate.dto.AuthCandidateRequestDTO;
 import br.com.daniellucas.gestao_vagas.modules.candidate.dto.AuthCandidateResponseDTO;
+import br.com.daniellucas.gestao_vagas.modules.candidate.repositories.CandidateRepository;
 import br.com.daniellucas.gestao_vagas.providers.JWTProvider;
 
 @Service

@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.daniellucas.gestao_vagas.exceptions.ResourceNotFoundException;
-import br.com.daniellucas.gestao_vagas.modules.candidate.CandidateRepository;
+import br.com.daniellucas.gestao_vagas.modules.candidate.repositories.ApplyJobRepository;
+import br.com.daniellucas.gestao_vagas.modules.candidate.repositories.CandidateRepository;
 import br.com.daniellucas.gestao_vagas.modules.company.repositories.JobRepository;
 
 @Service
@@ -15,7 +16,10 @@ public class ApplyJobCandidateUseCase {
   private CandidateRepository candidateRepository;
 
   @Autowired
-  private JobRepository JobRepository;
+  private JobRepository jobRepository;
+
+  @Autowired
+  private ApplyJobRepository applyJobRepository;
 
   public void execute(UUID candidateId, UUID jobId) {
 
@@ -24,7 +28,7 @@ public class ApplyJobCandidateUseCase {
         throw new ResourceNotFoundException();
       });
 
-    this.JobRepository.findById(jobId)
+    this.jobRepository.findById(jobId)
       .orElseThrow(() -> {
         throw new ResourceNotFoundException();
       });

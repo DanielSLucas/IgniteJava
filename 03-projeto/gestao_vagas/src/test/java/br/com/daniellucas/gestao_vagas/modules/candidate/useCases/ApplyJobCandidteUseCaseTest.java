@@ -14,8 +14,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.daniellucas.gestao_vagas.exceptions.ResourceNotFoundException;
-import br.com.daniellucas.gestao_vagas.modules.candidate.CandidateEntity;
-import br.com.daniellucas.gestao_vagas.modules.candidate.CandidateRepository;
+import br.com.daniellucas.gestao_vagas.modules.candidate.entities.CandidateEntity;
+import br.com.daniellucas.gestao_vagas.modules.candidate.repositories.CandidateRepository;
 import br.com.daniellucas.gestao_vagas.modules.company.repositories.JobRepository;
 
 @ExtendWith(MockitoExtension.class)
