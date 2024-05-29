@@ -49,7 +49,7 @@ public class JobController {
     })
   })
   @SecurityRequirement(name = "jwt_auth")
-  public ResponseEntity<JobEntity> postMethodName(
+  public ResponseEntity<JobEntity> createJob(
     @Valid @RequestBody CreateJobDTO createJobDTO,
     HttpServletRequest request
   ) {
