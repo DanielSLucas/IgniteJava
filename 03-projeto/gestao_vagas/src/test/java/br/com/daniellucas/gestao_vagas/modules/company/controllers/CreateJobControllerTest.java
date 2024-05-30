@@ -58,8 +58,6 @@ public class CreateJobControllerTest {
     
     company = this.companyRepository.saveAndFlush(company);
 
-    System.out.println(company);
-
     CreateJobDTO createJobDTO = CreateJobDTO.builder()
       .benefits("Test benefits")
       .description("Test description")
@@ -72,9 +70,22 @@ public class CreateJobControllerTest {
         .content(TestUtils.objectToJSON(createJobDTO))
         .header("Authorization", TestUtils.generateToken(company.getId()))
     ).andExpect(MockMvcResultMatchers.status().isCreated());
-
-    System.out.println(result);
   }
 
+  @Test
+  public void should_no_be_able_to_create_a_new_job_if_company_not_found() throws Exception {
+    CreateJobDTO createJobDTO = CreateJobDTO.builder()
+      .benefits("Test benefits")
+      .description("Test description")
+      .level("test level")
+      .build();
+
+    mvc.perform(
+      MockMvcRequestBuilders.post("/jobs/")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(TestUtils.objectToJSON(createJobDTO))
+        .header("Authorization", TestUtils.generateToken(UUID.randomUUID()))
+    ).andExpect(MockMvcResultMatchers.status().is(400));
+  }
 
 }
