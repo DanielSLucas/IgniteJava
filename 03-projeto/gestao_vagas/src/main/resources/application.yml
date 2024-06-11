@@ -16,7 +16,14 @@ security:
     secret: JAVAGAS_@12341
 
 management:
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    metrics:
+      enabled: true
   endpoints:
+    enabled-by-default: false
     web:
       exposure:
         include: health,metrics
