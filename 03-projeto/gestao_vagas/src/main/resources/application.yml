@@ -14,3 +14,9 @@ spring:
 security:
   token:
     secret: JAVAGAS_@12341
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics

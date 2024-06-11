@@ -30,6 +30,7 @@ public class SecurityConfig {
       .authorizeHttpRequests(auth -> {
         auth
           .requestMatchers(SWAGGER_URLS).permitAll()
+          .requestMatchers("/actuator/**").permitAll()
           .requestMatchers("/candidates/").permitAll()
           .requestMatchers("/companies/").permitAll()
           .requestMatchers("/auth/company").permitAll()
