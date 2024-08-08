@@ -7,5 +7,10 @@
 </head>
 <body>
     <h1 th:text="${mensagemDaController}"></h1>
+    <form method="post" th:action="@{/create}">
+      Nome do candidato <input type="text" name="nome_do_candidato">
+      <br />
+      <button> Cadastrar Candidato</button>
+    </form>
 </body>
 </html>
