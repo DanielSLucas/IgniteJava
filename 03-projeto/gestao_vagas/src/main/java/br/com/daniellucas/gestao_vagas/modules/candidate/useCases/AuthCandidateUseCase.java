@@ -3,6 +3,7 @@ package br.com.daniellucas.gestao_vagas.modules.candidate.useCases;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.naming.AuthenticationException;
 
@@ -44,15 +45,18 @@ public class AuthCandidateUseCase {
 
     var expiration = Instant.now().plus(Duration.ofMinutes(10));
 
+    List<String> roles = Arrays.asList("CANDIDATE");
+
     var token = this.jwtProvider.generateToken(
       candidate.getId().toString(),
       expiration,
-      Arrays.asList("CANDIDATE")
+      roles
     );
 
     return AuthCandidateResponseDTO.builder()
       .access_token(token)
       .expires_in(expiration.toEpochMilli())
+      .roles(roles)
       .build();
   }
 }
