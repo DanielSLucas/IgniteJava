@@ -21,15 +21,16 @@ public class PrimeiraPaginaController {
   }
 
   @GetMapping("/login")
-  public String login() {
+  public String login(Model model, @RequestParam String name) {
+    model.addAttribute("nome_do_candidato", name);
     return "/candidate/login";
   }
   
 
   @PostMapping("/create")
-  public String createCandidate(Model model, String nome_do_candidato) {
-    model.addAttribute("nome_do_candidato", nome_do_candidato);
-    return "/candidate/login";
+  public String createCandidate(Model model, Pessoa pessoa) {
+    return "redirect:/login?name=" + pessoa.name;
   }
   
+  record Pessoa(String user, String email, String name) {}
 }
