@@ -7,7 +7,7 @@
   <title>Login</title>
 </head>
 <body class="bg-gray-900 h-screen flex justify-center items-center">
-  <form action="" class="flex gap-24">
+  <form class="flex gap-24" method="post" th:action="@{/candidate/signIn}">
     <div class="text-white max-w-80 text-6xl flex items-center">
       Gestão de vagas
     </div>
@@ -24,6 +24,7 @@
         placeholder="Senha"
         class="bg-gray-100 text-gray-900 text-xd rounded-md w-96 block p-4 focus:outline-none focus:ring-green-600 focus:ring-2"  
       >
+      <p class="text-red-400" th:if="${error_message}" th:text="${error_message}">Usuário/senha incorretos</p>
       <button
         class="bg-green-900 w-96 p-4 rounded-md text-white hover:bg-green-700"
       >
