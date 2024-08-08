@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Com thymeleaf</title>
 </head>
 <body>
-    <h1>Primeira página construída com thymeleaf</h1>
+    <h1 th:text="${mensagemDaController}"></h1>
 </body>
 </html>
