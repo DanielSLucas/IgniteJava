@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Info do Candidato</title>
+</head>
+<body>
+  <h1>Info</h1>
+  <div th:object="${pessoa}">
+    <p>Nome: <span th:text="${pessoa.name}"></span></p>
+    <p>E-mail: <span th:text="${pessoa.email}"></span></p>
+    <p>Usuário: <span th:text="${pessoa.user}"></span></p>
+  </div>
+</body>
+</html>

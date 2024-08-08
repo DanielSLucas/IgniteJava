@@ -29,7 +29,9 @@ public class PrimeiraPaginaController {
 
   @PostMapping("/create")
   public String createCandidate(Model model, Pessoa pessoa) {
-    return "redirect:/login?name=" + pessoa.name;
+    model.addAttribute("pessoa", pessoa);
+
+    return "candidate/info";
   }
   
   record Pessoa(String user, String email, String name) {}
